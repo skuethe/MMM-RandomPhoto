@@ -72,15 +72,17 @@ Module.register("MMM-RandomPhoto",{
     },
 
     fetchImageList: function() {
-	Log.log(this.name + " fetching image list");
+	var self = this;
+
+	Log.info(this.name + " fetching image list");
         if (typeof this.config.repositoryConfig.path !== "undefined" && this.config.repositoryConfig.path !== null) {
             this.sendSocketNotification('FETCH_IMAGE_LIST');
 
-	    if (this.config.updateInterval != -1) {
+	    if (this.config.scanInterval != -1) {
 		clearTimeout(this.scanTimer);
 		this.scanTimer = setTimeout(function() {
-                   self.fetchImageList();
-     	        }, (this.config.scanInterval * 1000));
+			self.fetchImageList();
+		}, (this.config.scanInterval * 1000));
 	    }
         } else {
             Log.error("[" + this.name + "] Trying to use 'nextcloud' or 'localdirectory' but did not specify any 'config.repositoryConfig.path'.");
