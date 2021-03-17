@@ -37,6 +37,7 @@ The entry in `config.js` can include the following options:
 | `opacity`             | *Optional* - The opacity of the image.<br><br>**Type:** `double`<br>**Default:** `0.3`
 | `animationSpeed`      | *Optional* - How long the fade out and fade in of photos should take.<br><br>**Type:** `int`<br>**Default:** `500`
 | `updateInterval`      | *Optional* - How long before getting a new image.<br><br>**Type:** `int`<br>**Default:** `60` seconds
+| `scanInterval`	| *Optional* - How long before rescanning the image repository.  A value of -1 means 'never'.<br><br>**Type:** `int`<br>**Default:** `-1` (never)
 | `startHidden`         | *Optional* - Should the module start hidden? Useful if you use it as a "screensaver"<br><br>**Type:** `boolean`<br>**Default:** `false`
 | `startPaused`         | *Optional* - Should the module start in "paused" (automatic image loading will be paused) mode?<br><br>**Type:** `boolean`<br>**Default:** `false`
 | `showStatusIcon`      | *Optional* - Do you want to see the current status of automatic image loading ("play" / "paused" mode)?<br><br>**Type:** `boolean`<br>**Default:** `true`
