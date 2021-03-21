@@ -13,7 +13,7 @@ Module.register("MMM-RandomPhoto",{
         opacity: 0.3,
         animationSpeed: 500,
         updateInterval: 60,
-	scanInterval: -1,	// How often to look for new photos.  -1 = never
+        scanInterval: -1, // How often to look for new photos.  -1 = never
         imageRepository: "picsum", // Select the image repository source. One of "picsum" (default / fallback), "localdirectory" or "nextcloud" (currently broken because of CORS bug in nextcloud)
         repositoryConfig: {
             // if imageRepository = "picsum" -> "path", "username" and "password" are ignored and can be left empty
@@ -42,7 +42,7 @@ Module.register("MMM-RandomPhoto",{
 
     start: function() {
         this.updateTimer = null;
-	this.scanTimer = null;
+        this.scanTimer = null;
         this.imageList = null; // Used for nextcloud and localdirectory image list
         this.currentImageIndex = -1; // Used for nextcloud and localdirectory image list
         this.running = false;
@@ -72,18 +72,18 @@ Module.register("MMM-RandomPhoto",{
     },
 
     fetchImageList: function() {
-	var self = this;
+        var self = this;
 
-	Log.info(this.name + " fetching image list");
+        Log.info(this.name + " fetching image list");
         if (typeof this.config.repositoryConfig.path !== "undefined" && this.config.repositoryConfig.path !== null) {
             this.sendSocketNotification('FETCH_IMAGE_LIST');
 
-	    if (this.config.scanInterval != -1) {
-		clearTimeout(this.scanTimer);
-		this.scanTimer = setTimeout(function() {
-			self.fetchImageList();
-		}, (this.config.scanInterval * 1000));
-	    }
+            if (this.config.scanInterval != -1) {
+                clearTimeout(this.scanTimer);
+                this.scanTimer = setTimeout(function() {
+                        self.fetchImageList();
+                }, (this.config.scanInterval * 1000));
+            }
         } else {
             Log.error("[" + this.name + "] Trying to use 'nextcloud' or 'localdirectory' but did not specify any 'config.repositoryConfig.path'.");
         }
