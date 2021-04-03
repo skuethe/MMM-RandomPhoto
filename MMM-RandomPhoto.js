@@ -81,6 +81,7 @@ Module.register("MMM-RandomPhoto",{
             if (this.config.scanInterval != -1) {
                 clearTimeout(this.scanTimer);
                 this.scanTimer = setTimeout(function() {
+			Log.log("Requesting new images");
                         self.fetchImageList();
                 }, (this.config.scanInterval * 1000));
             }
@@ -411,6 +412,9 @@ Module.register("MMM-RandomPhoto",{
             if(!this.config.startHidden) {
                 this.resumeImageLoading(true);
             }
+        } else if (notification === "UPDATE_IMAGE_LIST") {
+            Log.log("Updating image list");
+            this.imageList = payload;
         }
     },
 
