@@ -4,6 +4,8 @@ const fs = require("fs"); // for localdirectory
 
 const NodeHelper = require("node_helper");
 
+var initialLoadCompleted = false;
+
 module.exports = NodeHelper.create({
 
     start: function() {
@@ -60,7 +62,13 @@ module.exports = NodeHelper.create({
                 }
             }
             this.imageList = imageList;
-            self.sendSocketNotification("IMAGE_LIST", imageList);
+            if (initialLoadCompleted == false) {
+                self.sendSocketNotification("IMAGE_LIST", imageList);
+                initialLoadCompleted = true;
+            } else {
+                self.sendSocketNotification("UPDATE_IMAGE_LIST", imageList);
+            }
+
             return;
         }
         return false;
@@ -93,7 +101,13 @@ module.exports = NodeHelper.create({
                         imageList[index] = item.replace("href>" + urlParts.pathname, "");
                         //console.log("[" + self.name + "] Found entry: " + imageList[index]);
                     });
-                    self.sendSocketNotification("IMAGE_LIST", imageList);
+                    if (initialLoadCompleted == false) {
+                        self.sendSocketNotification("IMAGE_LIST", imageList);
+                        initialLoadCompleted = true;
+                    } else {
+			console.log("Updating image list")
+                        self.sendSocketNotification("UPDATE_IMAGE_LIST", imageList);
+                    }
                     return;
                 } else {
                     console.log("[" + this.name + "] WARNING: did not get any images from nextcloud url");
