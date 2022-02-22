@@ -94,15 +94,18 @@ module.exports = NodeHelper.create({
                 body += data;
             });
             response.on("end", function() {
+                var filteredImageList = [];
                 imageList = body.match(/href>\/[^<]+/g);
                 imageList.shift(); // delete first array entry, because it contains the link to the current folder
                 if (imageList && imageList.length > 0) {
                     imageList.forEach(function(item, index) {
-                        // remove clutter and the pathing from the entry -> only save file name
-                        imageList[index] = item.replace("href>" + urlParts.pathname, "");
-                        //console.log("[" + self.name + "] Found entry: " + imageList[index]);
+                        //filter video files
+                        if (!item.endsWith('.mp4')) {
+                            // remove clutter and the pathing from the entry -> only save file name
+                            filteredImageList.push(item.replace("href>" + urlParts.pathname, ""));
+                        }
                     });
-                    self.sendSocketNotification("IMAGE_LIST", imageList);
+                    self.sendSocketNotification("IMAGE_LIST", filteredImageList);
                     return;
                 } else {
                     console.log("[" + this.name + "] WARNING: did not get any images from nextcloud url");
