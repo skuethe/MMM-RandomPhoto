@@ -1,6 +1,7 @@
 require("url"); // for nextcloud
 const https = require("https"); // for nextcloud
 const fs = require("fs"); // for localdirectory
+const {XMLParser} = require('fast-xml-parser'); //for nextcloud response parsing
 
 const NodeHelper = require("node_helper");
 
@@ -94,18 +95,9 @@ module.exports = NodeHelper.create({
                 body += data;
             });
             response.on("end", function() {
-                var filteredImageList = [];
-                imageList = body.match(/href>\/[^<]+/g);
-                imageList.shift(); // delete first array entry, because it contains the link to the current folder
+                imageList = self.extractImagesFromResponse(body, urlParts);
                 if (imageList && imageList.length > 0) {
-                    imageList.forEach(function(item, index) {
-                        //filter video files
-                        if (!item.endsWith('.mp4')) {
-                            // remove clutter and the pathing from the entry -> only save file name
-                            filteredImageList.push(item.replace("href>" + urlParts.pathname, ""));
-                        }
-                    });
-                    self.sendSocketNotification("IMAGE_LIST", filteredImageList);
+                    self.sendSocketNotification("IMAGE_LIST", imageList);
                     return;
                 } else {
                     console.log("[" + this.name + "] WARNING: did not get any images from nextcloud url");
@@ -117,6 +109,32 @@ module.exports = NodeHelper.create({
             console.log("[" + this.name + "] ERROR: " + err);
             return false;
         });
+    },
+
+    extractImagesFromResponse: function(body, urlParts) {
+        var imageList = [];
+
+        const options = {
+            ignoreDeclaration: true,
+            processEntities: false,
+            removeNSPrefix: true,
+        };
+
+        const parser = new XMLParser(options);
+        let jObj = parser.parse(body).multistatus.response;
+        for (const item in jObj) {
+            if (Object.hasOwnProperty.call(jObj, item)) {
+                const element = jObj[item];
+                if (element.propstat[0]) {
+                    if (element.propstat[0].prop) {
+                        if (element.propstat[0].prop.getcontenttype && element.propstat[0].prop.getcontenttype.startsWith('image/')) {
+                            imageList.push(element.href.replace(urlParts.pathname, ''));
+                        }
+                    }
+                }
+            }
+        }
+        return imageList;
     },
 
 
