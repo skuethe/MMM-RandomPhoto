@@ -1,5 +1,5 @@
 require("url"); // for nextcloud
-const https = require("https"); // for nextcloud
+const https = require("node:https"); // for nextcloud
 const fs = require("fs"); // for localdirectory
 
 const NodeHelper = require("node_helper");
