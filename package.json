@@ -2,6 +2,18 @@
   "name": "magic-mirror-module-random-photo",
   "version": "1.0.1",
   "description": "Show a random photo from an url",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skuethe/MMM-RandomPhoto.git"
+  },
+  "keywords": [
+    "MagicMirror",
+    "Module",
+    "Photo",
+    "Image",
+    "Picsum",
+    "Nextcloud"
+  ],
   "main": "MMM-RandomPhoto.js",
   "author": "skuethe",
   "license": "ISC",
