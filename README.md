@@ -139,5 +139,5 @@ Thinking about implementing the following things:
 
 ## Special Thanks
 
-- [Michael Teeuw](https://github.com/MichMich) for creating the awesome [MagicMirror2](https://github.com/MagicMirrorOrg/MagicMirror) project that made this module possible.
+- [Michael Teeuw](https://github.com/MichMich) for creating the awesome [MagicMirror²](https://github.com/MagicMirrorOrg/MagicMirror) project that made this module possible.
 - [Diego Vieira](https://github.com/diego-vieira) for [initially](https://github.com/diego-vieira/MMM-RandomPhoto) creating this module.
