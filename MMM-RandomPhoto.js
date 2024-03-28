@@ -1,6 +1,6 @@
 /* global Module */
 
-/* Magic Mirror
+/* MagicMirror²
  * Module: MMM-RandomPhoto
  *
  * By Diego Vieira <diego@protos.inf.br>
