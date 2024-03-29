@@ -1,6 +1,6 @@
 # MMM-RandomPhoto
 
-This a module for the [MagicMirror](https://github.com/MichMich/MagicMirror). It will show a (random) photo from any of these sources:
+This a module for the [MagicMirror²](https://github.com/MagicMirrorOrg/MagicMirror). It will show a (random) photo from any of these sources:
 
 - [picsum.photos](https://picsum.photos)
 - a share of any [nextcloud](https://nextcloud.com/) instance
@@ -139,5 +139,5 @@ Thinking about implementing the following things:
 
 ## Special Thanks
 
-- [Michael Teeuw](https://github.com/MichMich) for creating the awesome [MagicMirror2](https://github.com/MichMich/MagicMirror) project that made this module possible.
+- [Michael Teeuw](https://github.com/MichMich) for creating the awesome [MagicMirror²](https://github.com/MagicMirrorOrg/MagicMirror) project that made this module possible.
 - [Diego Vieira](https://github.com/diego-vieira) for [initially](https://github.com/diego-vieira/MMM-RandomPhoto) creating this module.

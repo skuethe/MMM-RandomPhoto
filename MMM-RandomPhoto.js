@@ -1,6 +1,6 @@
 /* global Module */
 
-/* Magic Mirror
+/* MagicMirror²
  * Module: MMM-RandomPhoto
  *
  * By Diego Vieira <diego@protos.inf.br>
@@ -138,7 +138,7 @@ Module.register("MMM-RandomPhoto",{
                     url = url + "=" + self.config.blurAmount;
                 }
             }
-            url = url + (url.indexOf('?') > -1 ? '&' : '?') + (new Date().getTime());
+            url = url + (url.indexOf('?') > -1 ? '&' : '?') + (new Date(Date.now()).getTime());
             self.smoothImageChange(url);
         }
 
