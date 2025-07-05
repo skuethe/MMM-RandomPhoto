@@ -13,7 +13,7 @@ module.exports = NodeHelper.create({
         this.localdirectory = false;
 
         this.imageList = [];
-        this.expressApp.get("/" + this.name + "/images/:randomImageName(*)", async function(request, response) {
+        this.expressApp.get("/" + this.name + "/images/:randomImageName", async function(request, response) {
             var imageBase64Encoded = await self.fetchEncodedImage(request.params.randomImageName);
             response.send(imageBase64Encoded);
         });
