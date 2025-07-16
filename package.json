@@ -1,6 +1,6 @@
 {
   "name": "magic-mirror-module-random-photo",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Show a random photo from an url",
   "repository": {
     "type": "git",
