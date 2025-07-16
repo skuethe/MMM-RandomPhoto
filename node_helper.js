@@ -14,7 +14,7 @@ module.exports = NodeHelper.create({
 
         this.imageList = [];
         this.expressApp.get("/" + this.name + "/images/:randomImageName", async function(request, response) {
-            var imageBase64Encoded = await self.fetchEncodedImage(request.params.randomImageName);
+            var imageBase64Encoded = await self.fetchEncodedImage(decodeURIComponent(request.params.randomImageName));
             response.send(imageBase64Encoded);
         });
     },
@@ -54,7 +54,7 @@ module.exports = NodeHelper.create({
             for (var f = 0; f < fileList.length; f++) {
                 if (fileList[f].isFile()) {
                     //TODO: add mime type check here
-                    self.imageList.push(path + "/" + fileList[f].name);
+                    self.imageList.push(encodeURIComponent(path + "/" + fileList[f].name));
                 }
                 if ((self.config.repositoryConfig.recursive === true) && fileList[f].isDirectory()) {		
                     self.fetchLocalImageDirectory(path + "/" + fileList[f].name);
@@ -99,7 +99,7 @@ module.exports = NodeHelper.create({
                 if (imageList && imageList.length > 0) {
                     imageList.forEach(function(item, index) {
                         // remove clutter and the pathing from the entry -> only save file name
-                        imageList[index] = item.replace("href>" + urlParts.pathname, "");
+                        imageList[index] = encodeURIComponent(item.replace("href>" + urlParts.pathname, ""));
                         //console.log("[" + self.name + "] Found entry: " + imageList[index]);
                     });
                     self.sendSocketNotification("IMAGE_LIST", imageList);
