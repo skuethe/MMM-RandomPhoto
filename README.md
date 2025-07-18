@@ -51,6 +51,7 @@ Options for `repositoryConfig` - [more information](https://github.com/skuethe/M
 | `username`            | *Required for nextcloud with basic auth* - The username if images require basic authentication.<br><br>**Type:** `string`<br>**Default:** ``
 | `password`            | *Required for nextcloud with basic auth* - The password if images require basic authentication.<br><br>**Type:** `string`<br>**Default:** ``
 | `recursive`           | *Optional for localdirectory* - Search recursive for images in path.<br><br>**Type:** `boolean`<br>**Default:** `false`
+| `exclude`           | *Optional for localdirectory* - Exclude matching regex files.<br><br>**Type:** `list`<br>**Default:** `[]`
 
 Here are some examples for entries in `config.js`
 
@@ -108,6 +109,7 @@ Here are some examples for entries in `config.js`
         repositoryConfig: {
             path: "/home/USER/pictures/background/",
             recursive: true,
+            exclude: ["tmp", "#recycle"],
         },
     }
 },
