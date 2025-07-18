@@ -26,6 +26,7 @@ Module.register("MMM-RandomPhoto",{
             username: "",
             password: "",
             recursive: false,
+			exclude: [],
         },
         width: 1920,
         height: 1080,
@@ -107,7 +108,7 @@ Module.register("MMM-RandomPhoto",{
         if (self.localdirectory || self.nextcloud) {
             if (self.imageList && self.imageList.length > 0) {
                 url = "/" + this.name + "/images/" + this.returnImageFromList(mode);
-                
+
                 jQuery.ajax({
                     method: "GET",
                     url: url,
