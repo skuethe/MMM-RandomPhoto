@@ -26,7 +26,7 @@ Module.register("MMM-RandomPhoto",{
             username: "",
             password: "",
             recursive: false,
-			exclude: [],
+            exclude: [],
         },
         width: 1920,
         height: 1080,
